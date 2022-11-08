@@ -22,8 +22,9 @@ public class FabricantesServlet extends HttpServlet {
 	 * Paths: 
 	 * 		/fabricantes/
 	 * 		/fabricantes/{id}
-	 * 		/fabricantes/edit/{id}
-	 * 		/fabricantes/create
+	 * 		/fabricantes/editar/{id}
+	 * 		/fabricantes/crear
+	 * 		/fabricantes/borrar
 	 */		
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
