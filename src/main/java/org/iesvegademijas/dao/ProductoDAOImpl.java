@@ -32,10 +32,12 @@ public class ProductoDAOImpl extends AbstractDAOImpl implements ProductoDAO{
         	//ps = conn.prepareStatement("INSERT INTO fabricante (nombre) VALUES (?)", new String[] {"codigo"});        	
         	//Ver también, AbstractDAOImpl.executeInsert ...
         	//Columna producto.codigo es clave primaria auto_increment, por ese motivo se omite de la sentencia SQL INSERT siguiente. 
-        	ps = conn.prepareStatement("INSERT INTO producto (nombre) VALUES (?)", Statement.RETURN_GENERATED_KEYS);
+        	ps = conn.prepareStatement("INSERT INTO producto (nombre, precio, codigo_fabricante) VALUES (?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
             
             int idx = 1;
             ps.setString(idx++, producto.getNombre());
+            ps.setDouble(idx++, producto.getPrecio());
+            ps.setInt(idx, producto.getCodigoFabricante());
                    
             int rows = ps.executeUpdate();
             if (rows == 0) 

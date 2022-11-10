@@ -50,7 +50,7 @@
 				Precio
 			</div>
 			<div style="float: none;width: auto;overflow: hidden;">
-				<input name="nombre" />
+				<input name="precio" />
 			</div> 
 		</div>
 		<div style="margin-top: 6px;" class="clearfix">
@@ -58,7 +58,7 @@
 				Código del fabricante
 			</div>
 			<div style="float: none;width: auto;overflow: hidden;">
-				<input name="nombre" />
+				<input name="codigo_fabricante" />
 			</div> 
 		</div>
 

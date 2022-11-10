@@ -131,6 +131,7 @@ public class ProductosServlet extends HttpServlet {
 			String precio = request.getParameter("precio");
 			String codigo_fabricante = request.getParameter("codigo_fabricante");
 			Producto nuevoProd = new Producto();
+			
 			nuevoProd.setNombre(nombre);
 			Double p = Double.parseDouble(precio);
 			nuevoProd.setPrecio(p);
@@ -182,6 +183,26 @@ public class ProductosServlet extends HttpServlet {
 			int codF = Integer.parseInt(codigo_fabricante);
 			prod.setCodigoFabricante(codF);
 			prodDAO.update(prod);
+			
+		} catch (NumberFormatException nfe) {
+			nfe.printStackTrace();
+		}
+		
+	}
+	
+	@Override
+	protected void doDelete(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		RequestDispatcher dispatcher;
+		ProductoDAO prodDAO = new ProductoDAOImpl();
+		String codigo = request.getParameter("codigo");
+		
+		try {
+			
+			int id = Integer.parseInt(codigo);
+		
+			prodDAO.delete(id);
 			
 		} catch (NumberFormatException nfe) {
 			nfe.printStackTrace();
