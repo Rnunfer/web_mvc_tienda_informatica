@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.iesvegademijas.dao.FabricanteDAO;
 import org.iesvegademijas.dao.FabricanteDAOImpl;
+import org.iesvegademijas.dto.FabricanteDTO;
 import org.iesvegademijas.model.Fabricante;
 
 public class FabricantesServlet extends HttpServlet {
@@ -40,6 +41,14 @@ public class FabricantesServlet extends HttpServlet {
 			//GET 
 			//	/fabricantes/
 			//	/fabricantes
+			
+			fabDAO.getAll().stream().map( f -> {
+				
+				FabricanteDTO fDTO = new FabricanteDTO(f);
+				fDTO.setNumProductos(fabDAO.getCountProductos(f.getCodigo()));
+				
+				return fDTO;
+			});
 			
 			request.setAttribute("listaFabricantes", fabDAO.getAll());		
 			dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/fabricantes.jsp");

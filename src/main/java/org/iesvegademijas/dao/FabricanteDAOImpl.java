@@ -180,6 +180,7 @@ public class FabricanteDAOImpl extends AbstractDAOImpl implements FabricanteDAO{
         	conn = connectDB();
         	
         	ps = conn.prepareStatement("DELETE FROM fabricante WHERE codigo = ?");
+        	
         	int idx = 1;        	
         	ps.setInt(idx, id);
         	
@@ -197,5 +198,43 @@ public class FabricanteDAOImpl extends AbstractDAOImpl implements FabricanteDAO{
         }
 		
 	}
-
+	
+	/**
+	 * Devuelve el número de productos de cada fabricante
+	 */
+	public Optional<Integer> getCountProductos(int id) {
+		
+		Connection conn = null;
+		PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+        try {
+        	conn = connectDB();
+        	
+        	ps = conn.prepareStatement("SELECT COUNT(*) FROM PRODUCTO WHERE codigo_fabricante = ?");
+        	
+        	int idx =  1;
+        	ps.setInt(idx, id);
+        	
+        	rs = ps.executeQuery();
+        	
+        	if (rs.next()) {
+        		int numProd = 1;
+        		idx = 1;
+        		// Falta sacar el count del select. Por ahora siempre será 1 para ver si funciona
+        		
+        		return Optional.of(numProd);
+        	}
+        	
+        } catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+            closeDb(conn, ps, rs);
+        }
+		return null;
+		
+	}
+	
 }

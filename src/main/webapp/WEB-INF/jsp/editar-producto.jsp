@@ -63,7 +63,7 @@
 				<label>Precio</label>
 			</div>
 			<div style="float: none;width: auto;overflow: hidden;">
-				<input name="nombre" value="<%= optProd.get().getPrecio() %>"/>
+				<input name="precio" value="<%= optProd.get().getPrecio() %>"/>
 			</div> 
 		</div>
 		<div style="margin-top: 6px;" class="clearfix">
@@ -71,7 +71,7 @@
 				<label>Código de fabricante</label>
 			</div>
 			<div style="float: none;width: auto;overflow: hidden;">
-				<input name="nombre" value="<%= optProd.get().getCodigoFabricante() %>"/>
+				<input name="codigo_fabricante" value="<%= optProd.get().getCodigoFabricante() %>"/>
 			</div> 
 		</div>
 		

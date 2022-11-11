@@ -15,5 +15,8 @@ public interface FabricanteDAO {
 	public void update(Fabricante fabricante);
 	
 	public void delete(int id);
+	
+	// Ampliación CRUD:
+	public Optional<Integer> getCountProductos(int id);
 
 }
