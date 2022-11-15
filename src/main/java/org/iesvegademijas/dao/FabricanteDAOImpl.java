@@ -211,7 +211,7 @@ public class FabricanteDAOImpl extends AbstractDAOImpl implements FabricanteDAO{
         try {
         	conn = connectDB();
         	
-        	ps = conn.prepareStatement("SELECT COUNT(*) FROM PRODUCTO WHERE codigo_fabricante = ?");
+        	ps = conn.prepareStatement("SELECT COUNT(P.codigo) as numProd from fabricante F left outer join producto P on F.codigo = P.codigo_fabricante where F.codigo = ? group by F.codigo;");
         	
         	int idx =  1;
         	ps.setInt(idx, id);
@@ -219,9 +219,7 @@ public class FabricanteDAOImpl extends AbstractDAOImpl implements FabricanteDAO{
         	rs = ps.executeQuery();
         	
         	if (rs.next()) {
-        		int numProd = 1;
-        		idx = 1;
-        		// Falta sacar el count del select. Por ahora siempre será 1 para ver si funciona
+        		int numProd = rs.getInt(idx);
         		
         		return Optional.of(numProd);
         	}

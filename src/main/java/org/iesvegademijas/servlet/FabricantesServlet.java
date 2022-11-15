@@ -13,6 +13,7 @@ import org.iesvegademijas.dao.FabricanteDAO;
 import org.iesvegademijas.dao.FabricanteDAOImpl;
 import org.iesvegademijas.dto.FabricanteDTO;
 import org.iesvegademijas.model.Fabricante;
+import static java.util.stream.Collectors.*;
 
 public class FabricantesServlet extends HttpServlet {
 
@@ -42,15 +43,15 @@ public class FabricantesServlet extends HttpServlet {
 			//	/fabricantes/
 			//	/fabricantes
 			
-			fabDAO.getAll().stream().map( f -> {
+			var lista = fabDAO.getAll().stream().map( f -> {
 				
 				FabricanteDTO fDTO = new FabricanteDTO(f);
 				fDTO.setNumProductos(fabDAO.getCountProductos(f.getCodigo()));
 				
 				return fDTO;
-			});
+			}).collect(toList());
 			
-			request.setAttribute("listaFabricantes", fabDAO.getAll());		
+			request.setAttribute("listaFabricantes", lista);		
 			dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/fabricantes.jsp");
 			        		       
 		} else {
