@@ -10,6 +10,10 @@ public class FabricanteDTO {
 	private String nombre;
 	private Optional<Integer> numProductos;
 
+	public FabricanteDTO() {
+		
+	}
+	
 	public FabricanteDTO(Fabricante f) {
 		this.codigo = f.getCodigo();
 		this.nombre = f.getNombre();

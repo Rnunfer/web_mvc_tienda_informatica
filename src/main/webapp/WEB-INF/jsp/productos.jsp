@@ -32,7 +32,10 @@
 						<form action="/tienda_informatica/productos/crear">
 							<input type="submit" value="Crear">
 						</form>
-					</div>
+						<form action="/tienda_informatica/fabricantes">
+							<input type="submit" value="Fabricantes">
+						</form>
+				</div>
 				
 			</div>
 		</div>
@@ -43,7 +46,7 @@
 			<div style="float: left;width: 10%">Código</div>
 			<div style="float: left;width: 30%">Nombre</div>
 			<div style="float: left;width: 20%">Precio</div>
-			<div style="float: left;width: 20%">Código del fabricante</div>
+			<div style="float: left;width: 10%">Código del fabricante</div>
 			<div style="float: none;width: auto;overflow: hidden;">Acción</div>
 		</div>
 		<div class="clearfix">
@@ -60,7 +63,7 @@
 			<div style="float: left;width: 10%"><%= producto.getCodigo()%></div>
 			<div style="float: left;width: 30%"><%= producto.getNombre()%></div>
 			<div style="float: left;width: 20%"><%= producto.getPrecio()%></div>
-			<div style="float: left;width: 20%"><%= producto.getCodigoFabricante()%></div>
+			<div style="float: left;width: 10%"><%= producto.getCodigoFabricante()%></div>
 			<div style="float: none;width: auto;overflow: hidden;">
 				<form action="/tienda_informatica/productos/<%= producto.getCodigo()%>" style="display: inline;">
     				<input type="submit" value="Ver Detalle" />

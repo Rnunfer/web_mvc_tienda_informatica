@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.iesvegademijas.dto.FabricanteDTO;
 import org.iesvegademijas.model.Fabricante;
 
 public class FabricanteDAOImpl extends AbstractDAOImpl implements FabricanteDAO{
@@ -231,8 +232,44 @@ public class FabricanteDAOImpl extends AbstractDAOImpl implements FabricanteDAO{
 		} finally {
             closeDb(conn, ps, rs);
         }
-		return null;
+        
+        return Optional.empty();
 		
+	}
+
+	@Override
+	public List<FabricanteDTO> getAllDTOPlusCountProductos() {
+		
+		Connection conn = null;
+		Statement s = null;
+        ResultSet rs = null;
+        
+        List<FabricanteDTO> listFabDTO = new ArrayList<>(); 
+        
+        try {
+        	conn = connectDB();
+
+        	// Se utiliza un objeto Statement dado que no hay parámetros en la consulta.
+        	s = conn.createStatement();
+    		
+        	rs = s.executeQuery("SELECT F.*, COUNT(P.codigo) as numProd from fabricante F left outer join producto P on F.codigo = P.codigo_fabricante group by F.codigo;");  
+            		
+            while (rs.next()) {
+            	FabricanteDTO fab = new FabricanteDTO();
+            	fab.setCodigo(rs.getInt("codigo"));
+            	fab.setNombre(rs.getString("nombre"));
+            	fab.setNumProductos(Optional.of(rs.getInt("numProd")));
+            	listFabDTO.add(fab);
+            }
+          
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+            closeDb(conn, s, rs);
+        }
+        return listFabDTO;
 	}
 	
 }

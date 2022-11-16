@@ -32,10 +32,24 @@
 						<form action="/tienda_informatica/fabricantes/crear">
 							<input type="submit" value="Crear">
 						</form>
+						<form action="/tienda_informatica/productos">
+							<input type="submit" value="Productos">
+						</form>
 					</div>
 				
 			</div>
 		</div>
+		<div class="clearfix">
+			<hr/>
+		</div>
+		<select name="ordenar-por">
+			<option value="nombre">Nombre</option>
+			<option value="codigo">Código</option>
+		</select>
+		<select name="modo">
+			<option value="ascendente">Ascendente</option>
+			<option value="descendente">Descendente</option>
+		</select>
 		<div class="clearfix">
 			<hr/>
 		</div>
@@ -52,6 +66,10 @@
         if (request.getAttribute("listaFabricantes") != null) {
             List<FabricanteDTO> listaFabricante = (List<FabricanteDTO>)request.getAttribute("listaFabricantes");
             
+            /*listaFabricante = listaFabricante.stream()
+            		.filter(f -> f.getNumProductos() > 1)
+            		//.sorted(comparing(FabricanteDTO::getNombre))
+            		.collect(toList());*/
             for (FabricanteDTO fabricante : listaFabricante) {
     %>
 

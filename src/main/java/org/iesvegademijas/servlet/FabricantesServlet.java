@@ -43,15 +43,15 @@ public class FabricantesServlet extends HttpServlet {
 			//	/fabricantes/
 			//	/fabricantes
 			
-			var lista = fabDAO.getAll().stream().map( f -> {
+			/*var lista = fabDAO.getAll().stream().map( f -> {
 				
 				FabricanteDTO fDTO = new FabricanteDTO(f);
 				fDTO.setNumProductos(fabDAO.getCountProductos(f.getCodigo()));
 				
 				return fDTO;
-			}).collect(toList());
+			}).collect(toList());*/
 			
-			request.setAttribute("listaFabricantes", lista);		
+			request.setAttribute("listaFabricantes", fabDAO.getAllDTOPlusCountProductos());		
 			dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/fabricantes.jsp");
 			        		       
 		} else {
