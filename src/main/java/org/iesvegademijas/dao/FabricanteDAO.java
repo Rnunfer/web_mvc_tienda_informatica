@@ -19,6 +19,7 @@ public interface FabricanteDAO {
 	
 	// Ampliación CRUD:
 	public Optional<Integer> getCountProductos(int id);
+	public List<FabricanteDTO> getAllDTOPlusCountProductos(String ordenarPor, String modoOrdenar);
 	public List<FabricanteDTO> getAllDTOPlusCountProductos();
 
 }

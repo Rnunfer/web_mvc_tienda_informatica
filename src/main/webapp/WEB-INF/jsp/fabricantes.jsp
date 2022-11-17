@@ -48,8 +48,8 @@
 				<option value="codigo" <% if (request.getParameter("ordenar-por") != null && request.getParameter("ordenar-por").equals("codigo")) {%> selected <% } %>>Código</option>
 			</select>
 			<select name="modo-ordenar">
-				<option value="ascendente"<% if (request.getParameter("modo-ordenar") != null && request.getParameter("modo-ordenar").equals("ascendente")) {%> selected <% } %>>Ascendente</option>
-				<option value="descendente"<% if (request.getParameter("modo-ordenar") != null && request.getParameter("modo-ordenar").equals("descendente")) {%> selected <% } %>>Descendente</option>
+				<option value="asc"<% if (request.getParameter("modo-ordenar") != null && request.getParameter("modo-ordenar").equals("asc")) {%> selected <% } %>>Ascendente</option>
+				<option value="desc"<% if (request.getParameter("modo-ordenar") != null && request.getParameter("modo-ordenar").equals("desc")) {%> selected <% } %>>Descendente</option>
 			</select>
 			<input type="submit" value="Ordenar">
 		</form>

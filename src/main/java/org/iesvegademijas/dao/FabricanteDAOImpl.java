@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -236,7 +237,7 @@ public class FabricanteDAOImpl extends AbstractDAOImpl implements FabricanteDAO{
         return Optional.empty();
 		
 	}
-
+	
 	@Override
 	public List<FabricanteDTO> getAllDTOPlusCountProductos() {
 		
@@ -253,6 +254,58 @@ public class FabricanteDAOImpl extends AbstractDAOImpl implements FabricanteDAO{
         	s = conn.createStatement();
     		
         	rs = s.executeQuery("SELECT F.*, COUNT(P.codigo) as numProd from fabricante F left outer join producto P on F.codigo = P.codigo_fabricante group by F.codigo;");  
+            		
+            while (rs.next()) {
+            	FabricanteDTO fab = new FabricanteDTO();
+            	fab.setCodigo(rs.getInt("codigo"));
+            	fab.setNombre(rs.getString("nombre"));
+            	fab.setNumProductos(Optional.of(rs.getInt("numProd")));
+            	listFabDTO.add(fab);
+            }
+          
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+            closeDb(conn, s, rs);
+        }
+        return listFabDTO;
+	}
+
+	@Override
+	public List<FabricanteDTO> getAllDTOPlusCountProductos(String ordenarPor, String modoOrdenar) {
+		
+		Connection conn = null;
+		Statement s = null;
+        ResultSet rs = null;
+        
+        List<FabricanteDTO> listFabDTO = new ArrayList<>(); 
+        
+        try {
+        	conn = connectDB();
+
+        	// Se utiliza un objeto Statement dado que no hay parámetros en la consulta.
+        	s = conn.createStatement();
+    		
+        	String consulta = "SELECT F.*, COUNT(P.codigo) as numProd from fabricante F left outer join producto P on F.codigo = P.codigo_fabricante group by F.codigo";
+        	List<String> lista_ordenarPor = new ArrayList<>();
+        	lista_ordenarPor.add("nombre");
+        	lista_ordenarPor.add("codigo");
+        	List<String> lista_modoOrdenar = new ArrayList<>();
+        	lista_modoOrdenar.add("asc");
+        	lista_modoOrdenar.add("desc");
+        	
+        	if (lista_ordenarPor.contains(ordenarPor)) {
+        		if (lista_modoOrdenar.contains(modoOrdenar)) {
+        			rs= s.executeQuery(consulta + " order by " + ordenarPor + " " + modoOrdenar + ";");
+        		} else {
+        			rs = s.executeQuery(consulta + " order by " + ordenarPor + ";");
+        		}
+        	} else {
+        		rs = s.executeQuery(consulta + ";");
+        	}
+        	    	  
             		
             while (rs.next()) {
             	FabricanteDTO fab = new FabricanteDTO();

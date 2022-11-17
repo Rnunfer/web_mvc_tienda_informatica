@@ -42,34 +42,40 @@ public class FabricantesServlet extends HttpServlet {
 		if (pathInfo == null || "/".equals(pathInfo)) {
 			
 			FabricanteDAO fabDAO = new FabricanteDAOImpl();
-			List<FabricanteDTO> listaOrdenada = fabDAO.getAllDTOPlusCountProductos();
 			
 			String ordenarPor = (String)request.getParameter("ordenar-por");
 			String modoOrdenar = (String)request.getParameter("modo-ordenar");
 			
+			List<FabricanteDTO> listaOrdenada;
 			if (ordenarPor != null && modoOrdenar != null) {
-				if (ordenarPor.equals("nombre") && modoOrdenar.equals("ascendente")) {
+				listaOrdenada = fabDAO.getAllDTOPlusCountProductos(ordenarPor, modoOrdenar);
+			} else {
+				listaOrdenada = fabDAO.getAllDTOPlusCountProductos();
+			}
+			
+			/*if (ordenarPor != null && modoOrdenar != null) {
+				if (ordenarPor.equals("nombre") && modoOrdenar.equals("asc")) {
 					listaOrdenada = listaOrdenada.stream()
 							.sorted(Comparator.comparing(FabricanteDTO::getNombre))
 							.collect(toList());
 					
-				} else if (ordenarPor.equals("nombre") && modoOrdenar.equals("descendente")) {
+				} else if (ordenarPor.equals("nombre") && modoOrdenar.equals("desc")) {
 					listaOrdenada = listaOrdenada.stream()
 							.sorted(Comparator.comparing(FabricanteDTO::getNombre).reversed())
 		            		.collect(toList());
 		
-				} else if (ordenarPor.equals("codigo") && modoOrdenar.equals("ascendente")) {
+				} else if (ordenarPor.equals("codigo") && modoOrdenar.equals("asc")) {
 					listaOrdenada = listaOrdenada.stream()
 							.sorted(Comparator.comparing(FabricanteDTO::getCodigo))
 		            		.collect(toList());
 		
-				} else if (ordenarPor.equals("codigo") && modoOrdenar.equals("descendente")) {
+				} else if (ordenarPor.equals("codigo") && modoOrdenar.equals("desc")) {
 					listaOrdenada = listaOrdenada.stream()
 							.sorted(Comparator.comparing(FabricanteDTO::getCodigo).reversed())
 		            		.collect(toList());
 		
 				}
-			}
+			}*/
 				
 			//GET 
 			//	/fabricantes/
