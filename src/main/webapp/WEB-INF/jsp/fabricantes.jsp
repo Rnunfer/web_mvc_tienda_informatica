@@ -42,14 +42,17 @@
 		<div class="clearfix">
 			<hr/>
 		</div>
-		<select name="ordenar-por">
-			<option value="nombre">Nombre</option>
-			<option value="codigo">Código</option>
-		</select>
-		<select name="modo">
-			<option value="ascendente">Ascendente</option>
-			<option value="descendente">Descendente</option>
-		</select>
+		<form method="get" action="/tienda_informatica/fabricantes/">
+			<select name="ordenar-por">
+				<option value="nombre" <% if (request.getParameter("ordenar-por") != null && request.getParameter("ordenar-por").equals("nombre")) {%> selected <% } %>>Nombre</option>
+				<option value="codigo" <% if (request.getParameter("ordenar-por") != null && request.getParameter("ordenar-por").equals("codigo")) {%> selected <% } %>>Código</option>
+			</select>
+			<select name="modo-ordenar">
+				<option value="ascendente"<% if (request.getParameter("modo-ordenar") != null && request.getParameter("modo-ordenar").equals("ascendente")) {%> selected <% } %>>Ascendente</option>
+				<option value="descendente"<% if (request.getParameter("modo-ordenar") != null && request.getParameter("modo-ordenar").equals("descendente")) {%> selected <% } %>>Descendente</option>
+			</select>
+			<input type="submit" value="Ordenar">
+		</form>
 		<div class="clearfix">
 			<hr/>
 		</div>
@@ -63,6 +66,9 @@
 			<hr/>
 		</div>
 	<% 
+		String ordenarPor = (String)request.getParameter("ordenar-por");
+		String modoOrdenar = (String)request.getParameter("modo-ordenar");
+	
         if (request.getAttribute("listaFabricantes") != null) {
             List<FabricanteDTO> listaFabricante = (List<FabricanteDTO>)request.getAttribute("listaFabricantes");
             

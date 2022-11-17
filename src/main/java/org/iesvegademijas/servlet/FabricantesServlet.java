@@ -2,6 +2,10 @@ package org.iesvegademijas.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Comparator;
+import java.util.List;
+import java.util.*;
+import static java.util.stream.Collectors.*;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,7 +17,6 @@ import org.iesvegademijas.dao.FabricanteDAO;
 import org.iesvegademijas.dao.FabricanteDAOImpl;
 import org.iesvegademijas.dto.FabricanteDTO;
 import org.iesvegademijas.model.Fabricante;
-import static java.util.stream.Collectors.*;
 
 public class FabricantesServlet extends HttpServlet {
 
@@ -37,8 +40,37 @@ public class FabricantesServlet extends HttpServlet {
 		String pathInfo = request.getPathInfo(); //
 			
 		if (pathInfo == null || "/".equals(pathInfo)) {
-			FabricanteDAO fabDAO = new FabricanteDAOImpl();
 			
+			FabricanteDAO fabDAO = new FabricanteDAOImpl();
+			List<FabricanteDTO> listaOrdenada = fabDAO.getAllDTOPlusCountProductos();
+			
+			String ordenarPor = (String)request.getParameter("ordenar-por");
+			String modoOrdenar = (String)request.getParameter("modo-ordenar");
+			
+			if (ordenarPor != null && modoOrdenar != null) {
+				if (ordenarPor.equals("nombre") && modoOrdenar.equals("ascendente")) {
+					listaOrdenada = listaOrdenada.stream()
+							.sorted(Comparator.comparing(FabricanteDTO::getNombre))
+							.collect(toList());
+					
+				} else if (ordenarPor.equals("nombre") && modoOrdenar.equals("descendente")) {
+					listaOrdenada = listaOrdenada.stream()
+							.sorted(Comparator.comparing(FabricanteDTO::getNombre).reversed())
+		            		.collect(toList());
+		
+				} else if (ordenarPor.equals("codigo") && modoOrdenar.equals("ascendente")) {
+					listaOrdenada = listaOrdenada.stream()
+							.sorted(Comparator.comparing(FabricanteDTO::getCodigo))
+		            		.collect(toList());
+		
+				} else if (ordenarPor.equals("codigo") && modoOrdenar.equals("descendente")) {
+					listaOrdenada = listaOrdenada.stream()
+							.sorted(Comparator.comparing(FabricanteDTO::getCodigo).reversed())
+		            		.collect(toList());
+		
+				}
+			}
+				
 			//GET 
 			//	/fabricantes/
 			//	/fabricantes
@@ -51,7 +83,7 @@ public class FabricantesServlet extends HttpServlet {
 				return fDTO;
 			}).collect(toList());*/
 			
-			request.setAttribute("listaFabricantes", fabDAO.getAllDTOPlusCountProductos());		
+			request.setAttribute("listaFabricantes", listaOrdenada);		
 			dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/fabricantes.jsp");
 			        		       
 		} else {
