@@ -16,5 +16,7 @@ public void create(Producto producto);
 	public void update(Producto producto);
 	
 	public void delete(int id);
+	
+	public List<Producto> getAllFiltrado(String filtro);
 
 }

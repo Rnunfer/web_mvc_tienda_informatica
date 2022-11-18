@@ -55,13 +55,13 @@ public class ProductosServlet extends HttpServlet {
 			//	/productos/
 			//	/productos
 			
-			List<Producto> lista = prodDAO.getAll();
 			String filtrarPorNombre = (String)request.getParameter("filtrar-por-nombre");
-			if(filtrarPorNombre != null) {
+			List<Producto> lista = prodDAO.getAllFiltrado(filtrarPorNombre);
+			/*if(filtrarPorNombre != null) {
 				lista = lista.stream()
 					.filter(p -> p.getNombre().toLowerCase().contains(filtrarPorNombre.toLowerCase()))
 					.collect(toList());
-			}
+			}*/
 						
 			request.setAttribute("listaProductos", lista);		
 			dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/productos.jsp");
