@@ -296,7 +296,13 @@ public class FabricanteDAOImpl extends AbstractDAOImpl implements FabricanteDAO{
         	lista_modoOrdenar.add("asc");
         	lista_modoOrdenar.add("desc");
         	
-        	if (lista_ordenarPor.contains(ordenarPor)) {
+        	if (!lista_ordenarPor.contains(ordenarPor) || !lista_modoOrdenar.contains(modoOrdenar)) {
+        		ordenarPor = "codigo";
+        		modoOrdenar = "asc";
+        	}
+        	rs= s.executeQuery(consulta + " order by " + ordenarPor + " " + modoOrdenar + ";");
+        	
+        	/*if (lista_ordenarPor.contains(ordenarPor)) {
         		if (lista_modoOrdenar.contains(modoOrdenar)) {
         			rs= s.executeQuery(consulta + " order by " + ordenarPor + " " + modoOrdenar + ";");
         		} else {
@@ -304,7 +310,7 @@ public class FabricanteDAOImpl extends AbstractDAOImpl implements FabricanteDAO{
         		}
         	} else {
         		rs = s.executeQuery(consulta + ";");
-        	}
+        	}*/
         	    	  
             		
             while (rs.next()) {

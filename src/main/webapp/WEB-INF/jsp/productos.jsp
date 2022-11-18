@@ -42,6 +42,12 @@
 		<div class="clearfix">
 			<hr/>
 		</div>
+		<form method="get" action="/tienda_informatica/productos/">
+			<input type="text" name="filtrar-por-nombre"><input type="submit" value="Buscar">
+		</form>
+		<div class="clearfix">
+			<hr/>
+		</div>
 		<div class="clearfix">
 			<div style="float: left;width: 10%">Código</div>
 			<div style="float: left;width: 30%">Nombre</div>
