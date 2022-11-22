@@ -11,7 +11,21 @@
 	<div id="contenedora" style="float:none; margin: 0 auto;width: 900px;" >
 	<%@ include file="header.jspf" %>
 	<%@ include file="nav.jspf" %>
-	<%@ include file="main.jspf" %>
+	<div class="clearfix">
+			<div style="float: left; width: 50%">
+				<h1>Fabricantes</h1>
+			</div>
+			<div style="float: none;width: auto;overflow: hidden;min-height: 80px;position: relative;">
+				
+				<div style="position: absolute; left: 39%; top : 39%;">
+					
+						<form action="/tienda_informatica/fabricantes/crear">
+							<input type="submit" value="Crear">
+						</form>
+					</div>
+				
+			</div>
+		</div>
 		<form method="get" action="/tienda_informatica/fabricantes/">
 			<select name="ordenar-por">
 				<option value="nombre" <% if (request.getParameter("ordenar-por") != null && request.getParameter("ordenar-por").equals("nombre")) {%> selected <% } %>>Nombre</option>
