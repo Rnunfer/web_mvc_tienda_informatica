@@ -56,12 +56,15 @@ public class ProductosServlet extends HttpServlet {
 			//	/productos
 			
 			String filtrarPorNombre = (String)request.getParameter("filtrar-por-nombre");
-			List<Producto> lista = prodDAO.getAllFiltrado(filtrarPorNombre);
-			/*if(filtrarPorNombre != null) {
-				lista = lista.stream()
-					.filter(p -> p.getNombre().toLowerCase().contains(filtrarPorNombre.toLowerCase()))
-					.collect(toList());
-			}*/
+			List<Producto> lista;
+			if (filtrarPorNombre != null) {
+				lista = prodDAO.getAllFiltrado(filtrarPorNombre);
+				/*lista = lista.stream()
+						.filter(p -> p.getNombre().toLowerCase().contains(filtrarPorNombre.toLowerCase()))
+						.collect(toList());*/
+			} else {
+				lista = prodDAO.getAll();
+			}
 						
 			request.setAttribute("listaProductos", lista);		
 			dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/productos.jsp");
