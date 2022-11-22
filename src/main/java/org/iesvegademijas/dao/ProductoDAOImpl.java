@@ -255,9 +255,9 @@ public class ProductoDAOImpl extends AbstractDAOImpl implements ProductoDAO{
         	conn = connectDB();
 
         	// Se utiliza un objeto Statement dado que no hay parámetros en la consulta.
-        	ps = conn.prepareStatement("SELECT * FROM producto WHERE nombre like ?;");
+
+        	ps = conn.prepareStatement("SELECT * FROM producto WHERE MATCH(nombre) AGAINST (?);");
             
-        	filtro = "%"+ filtro + "%";
         	ps.setString(1, filtro);
         	rs = ps.executeQuery();
         	

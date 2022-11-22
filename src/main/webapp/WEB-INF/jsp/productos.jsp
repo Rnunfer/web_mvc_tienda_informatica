@@ -5,45 +5,17 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Productos</title>
-<style>
-.clearfix::after {
-	content: "";
-	display: block;
-	clear: both;
-}
-
-</style>
-</head>
-<body>
+<%@ include file="/WEB-INF/jsp/head.jspf" %>
 <body>
 
 	<div id="contenedora" style="float:none; margin: 0 auto;width: 900px;" >
+	<%@ include file="header.jspf" %>
+	<%@ include file="nav.jspf" %>
+	<%@ include file="main.jspf" %>
 		<div class="clearfix">
-			<div style="float: left; width: 50%">
-				<h1>Productos</h1>
-			</div>
-			<div style="float: none;width: auto;overflow: hidden;min-height: 80px;position: relative;">
-				
-				<div style="position: absolute; left: 39%; top : 39%;">
-					
-						<form action="/tienda_informatica/productos/crear">
-							<input type="submit" value="Crear">
-						</form>
-						<form action="/tienda_informatica/fabricantes">
-							<input type="submit" value="Fabricantes">
-						</form>
-				</div>
-				
-			</div>
-		</div>
-		<div class="clearfix">
-			<hr/>
 		</div>
 		<form method="get" action="/tienda_informatica/productos/">
-			<input type="text" name="filtrar-por-nombre"><input type="submit" value="Buscar">
+			<input type="text" name="filtrar-por-nombre" <% if(request.getParameter("filtrar-por-nombre") != null) { %> value="<% request.getParameter("filtrar-por-nombre");%>"<% }; %>><input type="submit" value="Buscar">
 		</form>
 		<div class="clearfix">
 			<hr/>
@@ -92,6 +64,6 @@
 		No hay registros de fabricante
 	<% } %>
 	</div>
-</body>
+	<%@ include file ="/WEB-INF/jsp/footer.jspf"%>
 </body>
 </html>

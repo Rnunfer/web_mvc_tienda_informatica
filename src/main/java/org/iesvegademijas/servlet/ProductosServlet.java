@@ -58,7 +58,8 @@ public class ProductosServlet extends HttpServlet {
 			String filtrarPorNombre = (String)request.getParameter("filtrar-por-nombre");
 			List<Producto> lista;
 			if (filtrarPorNombre != null) {
-				lista = prodDAO.getAllFiltrado(filtrarPorNombre);
+				lista = prodDAO.getAllFiltradoFulltext(filtrarPorNombre);
+				//lista = prodDAO.getAllFiltrado(filtrarPorNombre);
 				/*lista = lista.stream()
 						.filter(p -> p.getNombre().toLowerCase().contains(filtrarPorNombre.toLowerCase()))
 						.collect(toList());*/

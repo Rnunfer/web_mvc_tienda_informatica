@@ -1,0 +1,10 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<nav class="menu">
+	<a href="">HOME</a>
+	<a href="fabricantes">Fabricantes</a>
+	<a href="productos">Producto</a>
+	<div class="menu-log">
+		<a href="#login">LOGIN</a>
+	</div>
+</nav>

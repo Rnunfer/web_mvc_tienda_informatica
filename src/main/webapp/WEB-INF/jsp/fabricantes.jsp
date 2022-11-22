@@ -5,43 +5,13 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Fabricantes</title>
-<style>
-.clearfix::after {
-	content: "";
-	display: block;
-	clear: both;
-}
-
-</style>
-</head>
-<body>
+<%@ include file="/WEB-INF/jsp/head.jspf" %>
 <body>
 
 	<div id="contenedora" style="float:none; margin: 0 auto;width: 900px;" >
-		<div class="clearfix">
-			<div style="float: left; width: 50%">
-				<h1>Fabricantes</h1>
-			</div>
-			<div style="float: none;width: auto;overflow: hidden;min-height: 80px;position: relative;">
-				
-				<div style="position: absolute; left: 39%; top : 39%;">
-					
-						<form action="/tienda_informatica/fabricantes/crear">
-							<input type="submit" value="Crear">
-						</form>
-						<form action="/tienda_informatica/productos">
-							<input type="submit" value="Productos">
-						</form>
-					</div>
-				
-			</div>
-		</div>
-		<div class="clearfix">
-			<hr/>
-		</div>
+	<%@ include file="header.jspf" %>
+	<%@ include file="nav.jspf" %>
+	<%@ include file="main.jspf" %>
 		<form method="get" action="/tienda_informatica/fabricantes/">
 			<select name="ordenar-por">
 				<option value="nombre" <% if (request.getParameter("ordenar-por") != null && request.getParameter("ordenar-por").equals("nombre")) {%> selected <% } %>>Nombre</option>
@@ -105,6 +75,6 @@
 		No hay registros de fabricante
 	<% } %>
 	</div>
-</body>
+	<%@ include file ="footer.jspf"%>
 </body>
 </html>
