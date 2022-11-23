@@ -4,12 +4,21 @@
 <%@page import="java.util.Optional"%>
 <!DOCTYPE html>
 <html>
-<%@ include file="/WEB-INF/jsp/head.jspf" %>
+<head>
+<meta charset="UTF-8">
+<title>Detalle Producto</title>
+<style>
+.clearfix::after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+</style>
+</head>
 <body>
 
 <div id="contenedora" style="float:none; margin: 0 auto;width: 900px;" >
-	<%@ include file="header.jspf" %>
-	<%@ include file="nav.jspf" %>
 		<div class="clearfix">
 			<div style="float: left; width: 50%">
 				<h1>Detalle Producto</h1>

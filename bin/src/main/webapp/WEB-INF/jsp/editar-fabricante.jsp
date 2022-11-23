@@ -4,24 +4,32 @@
 <%@page import="java.util.Optional"%>
 <!DOCTYPE html>
 <html>
-<%@ include file="/WEB-INF/jsp/head.jspf" %>
+<head>
+<meta charset="UTF-8">
+<title>Detalle Fabricante</title>
+<style>
+.clearfix::after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+</style>
+</head>
 <body>
 
 <div id="contenedora" style="float:none; margin: 0 auto;width: 900px;" >
-	<%@ include file="header.jspf" %>
-	<%@ include file="nav.jspf" %>
+	<form action="/tienda_informatica/fabricantes/editar/" method="post" >
+		<input type="hidden" name="__method__" value="put" />
 		<div class="clearfix">
 			<div style="float: left; width: 50%">
-				<h1>Detalle Fabricante</h1>
+				<h1>Editar Fabricante</h1>
 			</div>
 			<div style="float: none;width: auto;overflow: hidden;min-height: 80px;position: relative;">
 				
 				<div style="position: absolute; left: 39%; top : 39%;">
-					
-						<form action="/tienda_informatica/fabricantes" >
-							<input type="submit" value="Volver" />
-						</form>
-					</div>
+							<input type="submit" value="Guardar" />						
+				</div>
 				
 			</div>
 		</div>
@@ -39,7 +47,7 @@
 				<label>Código</label>
 			</div>
 			<div style="float: none;width: auto;overflow: hidden;">
-				<input value="<%= optFab.get().getCodigo() %>" readonly="readonly"/>
+				<input name="codigo" value="<%= optFab.get().getCodigo() %>" readonly="readonly"/>
 			</div> 
 		</div>
 		<div style="margin-top: 6px;" class="clearfix">
@@ -47,7 +55,7 @@
 				<label>Nombre</label>
 			</div>
 			<div style="float: none;width: auto;overflow: hidden;">
-				<input value="<%= optFab.get().getNombre() %>" readonly="readonly"/>
+				<input name="nombre" value="<%= optFab.get().getNombre() %>"/>
 			</div> 
 		</div>
 		
@@ -56,7 +64,7 @@
 				request.sendRedirect("fabricantes/");
 		
 		<% 	} %>
-		
+	</form>
 </div>
 
 </body>

@@ -5,13 +5,23 @@
 
 <!DOCTYPE html>
 <html>
-<%@ include file="/WEB-INF/jsp/head.jspf" %>
+<head>
+<meta charset="UTF-8">
+<title>Productos</title>
+<style>
+.clearfix::after {
+	content: "";
+	display: block;
+	clear: both;
+}
+
+</style>
+</head>
+<body>
 <body>
 
 	<div id="contenedora" style="float:none; margin: 0 auto;width: 900px;" >
-	<%@ include file="header.jspf" %>
-	<%@ include file="nav.jspf" %>
-	<div class="clearfix">
+		<div class="clearfix">
 			<div style="float: left; width: 50%">
 				<h1>Productos</h1>
 			</div>
@@ -22,14 +32,18 @@
 						<form action="/tienda_informatica/productos/crear">
 							<input type="submit" value="Crear">
 						</form>
-					</div>
+						<form action="/tienda_informatica/fabricantes">
+							<input type="submit" value="Fabricantes">
+						</form>
+				</div>
 				
 			</div>
 		</div>
 		<div class="clearfix">
+			<hr/>
 		</div>
 		<form method="get" action="/tienda_informatica/productos/">
-			<input type="text" name="filtrar-por-nombre" <% if(request.getParameter("filtrar-por-nombre") != null) { %> value="<% request.getParameter("filtrar-por-nombre");%>"<% }; %>><input type="submit" value="Buscar">
+			<input type="text" name="filtrar-por-nombre"><input type="submit" value="Buscar">
 		</form>
 		<div class="clearfix">
 			<hr/>
@@ -37,7 +51,7 @@
 		<div class="clearfix">
 			<div style="float: left;width: 10%">Código</div>
 			<div style="float: left;width: 30%">Nombre</div>
-			<div style="float: left;width: 10%">Precio</div>
+			<div style="float: left;width: 20%">Precio</div>
 			<div style="float: left;width: 10%">Código del fabricante</div>
 			<div style="float: none;width: auto;overflow: hidden;">Acción</div>
 		</div>
@@ -54,7 +68,7 @@
 		<div style="margin-top: 6px;" class="clearfix">
 			<div style="float: left;width: 10%"><%= producto.getCodigo()%></div>
 			<div style="float: left;width: 30%"><%= producto.getNombre()%></div>
-			<div style="float: left;width: 10%"><%= producto.getPrecio()%></div>
+			<div style="float: left;width: 20%"><%= producto.getPrecio()%></div>
 			<div style="float: left;width: 10%"><%= producto.getCodigoFabricante()%></div>
 			<div style="float: none;width: auto;overflow: hidden;">
 				<form action="/tienda_informatica/productos/<%= producto.getCodigo()%>" style="display: inline;">
@@ -78,6 +92,6 @@
 		No hay registros de fabricante
 	<% } %>
 	</div>
-	<%@ include file ="/WEB-INF/jsp/footer.jspf"%>
+</body>
 </body>
 </html>
