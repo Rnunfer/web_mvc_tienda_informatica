@@ -50,9 +50,11 @@
 			<div style="float: left;width: 50%">
 				Rol
 			</div>
-			<div style="float: none;width: auto;overflow: hidden;">
-				<input name="rol" />
-			</div> 
+			<select name="rol">
+				<option value="Administrador">Administrador</option>
+				<option value="Cliente">Cliente</option>
+				<option value="Vendedor">Vendedor</option>
+			</select>
 		</div>
 
 	</form>

@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <nav class="menu">
+<section class="contenedor">
+	
 	<a href="/tienda_informatica/">HOME</a>
 	<a href="/tienda_informatica/fabricantes">Fabricantes</a>
 	<a href="/tienda_informatica/productos">Producto</a>
@@ -8,4 +8,6 @@
 	<div class="menu-log">
 		<a href="#login">LOGIN</a>
 	</div>
+</section>
+	
 </nav>

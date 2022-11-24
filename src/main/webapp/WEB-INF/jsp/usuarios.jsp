@@ -8,9 +8,10 @@
 <%@ include file="/WEB-INF/jsp/head.jspf" %>
 <body>
 
+<%@ include file="header.jspf" %>
+<%@ include file="nav.jspf" %>
 	<div id="contenedora" style="float:none; margin: 0 auto;width: 900px;" >
-	<%@ include file="header.jspf" %>
-	<%@ include file="nav.jspf" %>
+	
 	<div class="clearfix">
 			<div style="float: left; width: 50%">
 				<h1>Usuarios</h1>
@@ -31,8 +32,8 @@
 		</div>
 		<div class="clearfix">
 			<div style="float: left;width: 10%">Código</div>
-			<div style="float: left;width: 20%">Nombre</div>
-			<div style="float: left;width: 20%">Contraseña</div>
+			<div style="float: left;width: 15%">Nombre</div>
+			<div style="float: left;width: 25%">Contraseña</div>
 			<div style="float: left;width: 20%">Rol</div>
 			<div style="float: none;width: auto;overflow: hidden;">Acción</div>
 		</div>
@@ -49,8 +50,8 @@
 
 		<div style="margin-top: 6px;" class="clearfix">
 			<div style="float: left;width: 10%"><%= usuario.getCodigo()%></div>
-			<div style="float: left;width: 20%"><%= usuario.getNombre()%></div>
-			<div style="float: left;width: 20%"><%= usuario.getContraseña()%></div>
+			<div style="float: left;width: 15%"><%= usuario.getNombre()%></div>
+			<textarea  rows="1" readonly="readonly" style="float: left;width: 25%; margin-right: 5px"><%= usuario.getContraseña()%></textarea>
 			<div style="float: left;width: 20%"><%= usuario.getRol()%></div>
 			<div style="float: none;width: auto;overflow: hidden;">
 				<form action="/tienda_informatica/usuarios/<%= usuario.getCodigo()%>" style="display: inline;">

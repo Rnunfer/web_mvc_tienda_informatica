@@ -170,7 +170,7 @@ public class UsuariosServlet extends HttpServlet {
 		
 		String codigo = request.getParameter("codigo");
 		String nombre = request.getParameter("nombre");
-		String contraseña = request.getParameter("contraseña");
+		String contraseña = request.getParameter("contrasenia");
 		String rol = request.getParameter("rol");
 		Usuario usu = new Usuario();
 		

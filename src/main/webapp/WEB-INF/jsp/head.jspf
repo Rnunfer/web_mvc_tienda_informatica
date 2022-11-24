@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <head>
 	<title>Tienda Informatica</title>
+	<script src="https://kit.fontawesome.com/1bb080c6ae.js" crossorigin="anonymous"></script>
+	
 	<style>
 		.head1 {
 			font-size:40px;
@@ -13,10 +15,16 @@
 			margin-left:10px;
 			margin-bottom:15px;
 		}
+		
 		body {
 			margin: 0 auto;
 			background-position:center;
 			background-size: contain;
+		}
+	
+		header {
+			margin: 0 auto;
+			width: 900px;
 		}
 	
 		.menu {
@@ -28,6 +36,12 @@
 			margin: 0 auto;
 			overflow: hidden;
 		}
+		
+		.menu .contenedor {
+			margin: 0 auto;
+			width: 900px;
+		}
+		
 		.menu a {
 			float: left;
 			color: white;
@@ -54,6 +68,10 @@
 		}
 		.body_sec {
 			margin-left:20px;
+		}
+		
+		textarea {
+		resize: none;
 		}
 	</style>
 </head>

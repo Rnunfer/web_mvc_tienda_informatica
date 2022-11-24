@@ -1,5 +1,8 @@
 package org.iesvegademijas.dao;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -35,10 +38,14 @@ public class UsuarioDAOImpl extends AbstractDAOImpl implements UsuarioDAO{
         	ps = conn.prepareStatement("INSERT INTO usuario (nombre, contrasenia, rol) VALUES (?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
             
             int idx = 1;
-            ps.setString(idx++, usuario.getNombre());
-            ps.setString(idx++, usuario.getContraseña());
-            ps.setString(idx, usuario.getRol());
-                   
+            try {
+            	ps.setString(idx++, usuario.getNombre());
+				ps.setString(idx++, hashPassword(usuario.getContraseña()));
+				ps.setString(idx, usuario.getRol());
+			} catch (NoSuchAlgorithmException e) {
+				e.printStackTrace();
+			}
+            
             int rows = ps.executeUpdate();
             if (rows == 0) 
             	System.out.println("INSERT de producto con 0 filas insertadas.");
@@ -202,6 +209,32 @@ public class UsuarioDAOImpl extends AbstractDAOImpl implements UsuarioDAO{
             closeDb(conn, ps, rs);
         }
 		
+	}
+	
+	public static String hashPassword(String password ) throws NoSuchAlgorithmException {
+		MessageDigest digest;
+		
+		digest = MessageDigest.getInstance("SHA-256");
+		byte[] encodedhash = digest.digest(
+				password.getBytes(StandardCharsets.UTF_8));
+		
+		return bytesToHex(encodedhash);					
+		
+	}
+	
+	private static String bytesToHex(byte[] byteHash) {
+		
+	    StringBuilder hexString = new StringBuilder(2 * byteHash.length);	  	
+	    for (int i = 0; i < byteHash.length; i++) {
+	        String hex = Integer.toHexString(0xff & byteHash[i]);
+	        if(hex.length() == 1) {
+	            hexString.append('0');
+	        }
+	        hexString.append(hex);
+	    }
+	    
+	    return hexString.toString();
+	    
 	}
 
 	
