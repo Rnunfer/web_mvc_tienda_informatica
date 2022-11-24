@@ -8,10 +8,10 @@
 <html>
 <%@ include file="/WEB-INF/jsp/head.jspf" %>
 <body>
-
-<div id="contenedora" style="float:none; margin: 0 auto;width: 900px;" >
 	<%@ include file="header.jspf" %>
 	<%@ include file="nav.jspf" %>
+<div id="contenedora" style="float:none; margin: 0 auto;width: 900px;" >
+	
 	<form action="/tienda_informatica/productos/crear/" method="post">
 		<div class="clearfix">
 			<div style="float: left; width: 50%">

@@ -11,27 +11,18 @@
 	<%@ include file="nav.jspf" %>
 <div id="contenedora" style="float:none; margin: 0 auto;width: 900px;" >
 	
-	<form action="/tienda_informatica/usuarios/crear/" method="post">
+	<form action="/tienda_informatica/usuarios/login/" method="post">
+	<input type="hidden" name="__method__" value="login" />
 		<div class="clearfix">
-			<div style="float: left; width: 50%">
-				<h1>Crear Usuario</h1>
+			<div style="float: left; width: 100%">
+				<h1>Iniciar Sesión</h1>
 			</div>
-			<div style="float: none;width: auto;overflow: hidden;min-height: 80px;position: relative;">
-				
-				<div style="position: absolute; left: 39%; top : 39%;">								
-					<input type="submit" value="Crear"/>					
-				</div>
-				
-			</div>
-			
-		</div>
-		
+		</div>		
 		<div class="clearfix">
 			<hr/>
 		</div>
-		
 		<div style="margin-top: 6px;" class="clearfix">
-			<div style="float: left;width: 50%">
+			<div style="float: left;width: 30%">
 				Nombre
 			</div>
 			<div style="float: none;width: auto;overflow: hidden;">
@@ -39,26 +30,20 @@
 			</div> 
 		</div>
 		<div style="margin-top: 6px;" class="clearfix">
-			<div style="float: left;width: 50%">
+			<div style="float: left;width: 30%">
 				Contraseña
 			</div>
 			<div style="float: none;width: auto;overflow: hidden;">
 				<input name="contrasenia" />
 			</div> 
 		</div>
-		<div style="margin-top: 6px;" class="clearfix">
-			<div style="float: left;width: 50%">
-				Rol
-			</div>
-			<select name="rol">
-				<option value="Administrador">Administrador</option>
-				<option value="Cliente">Cliente</option>
-				<option value="Vendedor">Vendedor</option>
-			</select>
+		<div style="width: 29.5%;display: inline-block;"> </div>
+		<div style="margin-top: 20px; display:inline-block;" class="clearfix">
+			<input type="submit" value="Iniciar sesión">
 		</div>
 
 	</form>
 </div>
-<%@ include file ="footer.jspf"%>
+
 </body>
 </html>

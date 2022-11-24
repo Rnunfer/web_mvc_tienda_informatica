@@ -15,5 +15,7 @@ public void create(Usuario usuario);
 	public void update(Usuario usuario);
 	
 	public void delete(int id);
+	
+	public Usuario loginUsuario(String nombre, String contraseña);
 
 }

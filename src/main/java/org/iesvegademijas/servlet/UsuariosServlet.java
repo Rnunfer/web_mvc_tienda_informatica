@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.iesvegademijas.dao.UsuarioDAO;
 import org.iesvegademijas.dao.UsuarioDAOImpl;
@@ -31,6 +32,7 @@ public class UsuariosServlet extends HttpServlet {
 	 * 		/usuarios/editar/{id}	-- accede al formulario para editar usuario con {id}
 	 * 		/usuarios/crear		-- accede al formulario para crear un usuario nuevo
 	 * 		/usuarios/borrar		-- accede al formulario para borrar un usuario con {id}
+	 * 		/usuarios/login     -- accede al formulario para logearse como un usuario
      */
     public UsuariosServlet() {
         super();
@@ -63,6 +65,8 @@ public class UsuariosServlet extends HttpServlet {
 			// 		/usuarios/edit/{id}/
 			// 		/usuarios/create
 			// 		/usuarios/create/
+			//		/usaurios/login
+			//		/usaurios/login/
 			
 			pathInfo = pathInfo.replaceAll("/$", "");
 			String[] pathParts = pathInfo.split("/");
@@ -76,7 +80,14 @@ public class UsuariosServlet extends HttpServlet {
 				request.setAttribute("listaUsuarios", usuDAO.getAll());
 				dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/crear-usuario.jsp");
         												
-			
+			} else if (pathParts.length == 2 && "login".equals(pathParts[1]) ) {
+					UsuarioDAO usuDAO = new UsuarioDAOImpl();
+					
+					// GET
+					// /usuarios/login
+					request.setAttribute("listaUsuarios", usuDAO.getAll());
+					dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/login.jsp");
+					
 			} else if (pathParts.length == 2) {
 				UsuarioDAO usuDAO = new UsuarioDAOImpl();
 				// GET
@@ -101,9 +112,8 @@ public class UsuariosServlet extends HttpServlet {
 					        								
 				} catch (NumberFormatException nfe) {
 					nfe.printStackTrace();
-					dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/usaurios.jsp");
+					dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/usuarios.jsp");
 				}
-				
 				
 			} else {
 				
@@ -141,17 +151,21 @@ public class UsuariosServlet extends HttpServlet {
 			
 		} else if (__method__ != null && "put".equalsIgnoreCase(__method__)) {			
 			// Actualizar uno existente
-			//Dado que los forms de html sólo soportan method GET y POST utilizo parámetro oculto para indicar la operación de actulización PUT.
+			//Dado que los forms de html sólo soportan method GET y POST utilizo parámetro oculto para indicar la operación de actualización PUT.
 			doPut(request, response);
 			
 		
 		} else if (__method__ != null && "delete".equalsIgnoreCase(__method__)) {			
 			// Actualizar uno existente
-			//Dado que los forms de html sólo soportan method GET y POST utilizo parámetro oculto para indicar la operación de actulización DELETE.
+			//Dado que los forms de html sólo soportan method GET y POST utilizo parámetro oculto para indicar la operación de actualización DELETE.
 			doDelete(request, response);
 			
 			
-			
+		} else if (__method__ != null && "login".equalsIgnoreCase(__method__)) {
+			// Logearse a una cuenta
+			//Dado que los forms de html sólo soportan method GET y POST utilizo parámetro oculto para indicar la operación de actualización LOGIN.
+			 doLogin(request, response);
+			 
 		} else {
 			
 			System.out.println("Opción POST no soportada.");
@@ -208,5 +222,20 @@ public class UsuariosServlet extends HttpServlet {
 		}
 		
 	}
+	
+	protected void doLogin(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
+		UsuarioDAO usuDAO = new UsuarioDAOImpl();
+		
+		String nombre = request.getParameter("nombre");
+		String contraseña = request.getParameter("contrasenia");
+		Usuario usuario = usuDAO.loginUsuario(nombre, contraseña);
+		if (usuario != null) {
+			HttpSession session=request.getSession(true);  
+			session.setAttribute("usuario-logado", usuario); 
+		}
+
+		 
+	}
 }

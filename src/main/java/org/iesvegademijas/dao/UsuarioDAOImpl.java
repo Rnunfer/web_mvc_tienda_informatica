@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.iesvegademijas.model.Producto;
 import org.iesvegademijas.model.Usuario;
 
 public class UsuarioDAOImpl extends AbstractDAOImpl implements UsuarioDAO{
@@ -211,6 +212,55 @@ public class UsuarioDAOImpl extends AbstractDAOImpl implements UsuarioDAO{
 		
 	}
 	
+	@Override
+	public Usuario loginUsuario(String nombre, String contraseña) {
+		
+		Connection conn = null;
+		PreparedStatement ps = null;
+        ResultSet rs = null;
+        
+        Usuario usuarioLogin = new Usuario();
+        try {
+			contraseña = hashPassword(contraseña);
+		} catch (NoSuchAlgorithmException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+        
+        try {
+        	conn = connectDB();
+
+        	// Se utiliza un objeto Statement dado que no hay parámetros en la consulta.
+
+        	ps = conn.prepareStatement("SELECT * FROM usuario WHERE MATCH(nombre) AGAINST (?);");
+            
+        	ps.setString(1, nombre);
+        	rs = ps.executeQuery();
+        	
+            if (rs.next()) {
+            	
+            	ps.setString(1, contraseña);
+            	rs = ps.executeQuery();
+            	
+            	if (rs.next()) {
+            		usuarioLogin.setCodigo(rs.getInt("codigo"));
+            		usuarioLogin.setNombre(rs.getString("nombre"));
+            		usuarioLogin.setContraseña(rs.getString("contrasenia"));
+            		usuarioLogin.setRol(rs.getString("rol"));
+            	}
+            	
+            }
+          
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} finally {
+            closeDb(conn, ps, rs);
+        }
+		return usuarioLogin;
+	}
+	
 	public static String hashPassword(String password ) throws NoSuchAlgorithmException {
 		MessageDigest digest;
 		
@@ -237,7 +287,6 @@ public class UsuarioDAOImpl extends AbstractDAOImpl implements UsuarioDAO{
 	    
 	}
 
-	
 	
 
 }

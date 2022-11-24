@@ -6,7 +6,7 @@
 	<a href="/tienda_informatica/productos">Producto</a>
 	<a href="/tienda_informatica/usuarios">Usuario</a>
 	<div class="menu-log">
-		<a href="#login">LOGIN</a>
+		<a href="/tienda_informatica/usuarios/login">LOGIN</a>
 	</div>
 </section>
 	
