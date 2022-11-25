@@ -239,6 +239,7 @@ public class UsuarioDAOImpl extends AbstractDAOImpl implements UsuarioDAO{
         	
             if (rs.next()) {
             	
+            	ps = conn.prepareStatement("SELECT * FROM usuario WHERE MATCH(contrasenia) AGAINST (?);");
             	ps.setString(1, contraseña);
             	rs = ps.executeQuery();
             	

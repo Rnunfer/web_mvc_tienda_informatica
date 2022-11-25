@@ -29,6 +29,7 @@
 		<div class="clearfix">
 		</div>
 		<form method="get" action="/tienda_informatica/productos/">
+		<img src="/src/main/webapp/imagenes/lupa.png">
 			<input type="text" name="filtrar-por-nombre" <% if(request.getParameter("filtrar-por-nombre") != null) { %> value="<% request.getParameter("filtrar-por-nombre");%>"<% }; %>><input type="submit" value="Buscar">
 		</form>
 		<div class="clearfix">

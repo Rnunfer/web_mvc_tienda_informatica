@@ -165,14 +165,22 @@ public class UsuariosServlet extends HttpServlet {
 			// Logearse a una cuenta
 			//Dado que los forms de html sólo soportan method GET y POST utilizo parámetro oculto para indicar la operación de actualización LOGIN.
 			 doLogin(request, response);
-			 
+		
+		} else if (__method__ != null && "logout".equalsIgnoreCase(__method__)) {
+			doLogout(request, response);
+			
 		} else {
 			
 			System.out.println("Opción POST no soportada.");
 			
 		}
 		
-		response.sendRedirect("/tienda_informatica/usuarios");
+		if (__method__ != null && ("login".equalsIgnoreCase(__method__) || "logout".equalsIgnoreCase(__method__))) {
+			response.sendRedirect("/tienda_informatica/");
+		} else {
+			response.sendRedirect("/tienda_informatica/usuarios");
+		}
+		
 		//response.sendRedirect("/tienda_informatica/usuarios");
 	}
 	
@@ -231,11 +239,18 @@ public class UsuariosServlet extends HttpServlet {
 		String nombre = request.getParameter("nombre");
 		String contraseña = request.getParameter("contrasenia");
 		Usuario usuario = usuDAO.loginUsuario(nombre, contraseña);
-		if (usuario != null) {
+		if (usuario.getCodigo() != 0) {
 			HttpSession session=request.getSession(true);  
-			session.setAttribute("usuario-logado", usuario); 
+			session.setAttribute("usuario-logeado", usuario); 
 		}
 
 		 
+	}
+	
+	protected void doLogout(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		HttpSession session=request.getSession();
+		session.invalidate();
 	}
 }
