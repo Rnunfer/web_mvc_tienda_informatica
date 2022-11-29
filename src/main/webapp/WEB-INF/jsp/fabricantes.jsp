@@ -1,7 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@page import="org.iesvegademijas.dto.FabricanteDTO"%>
+<%@page import="org.iesvegademijas.model.Usuario"%>
 <%@page import="java.util.List"%>
+<%
+	Usuario usuario = null;
+	usuario = (Usuario)session.getAttribute("usuario-logeado");
+	
+	boolean mostrarOpcionesAdmin = false;
+	if (session != null && (usuario = (Usuario)session.getAttribute("usuario-logeado") )!= null && "Administrador".equals(usuario.getRol())) {
+		mostrarOpcionesAdmin = true;
+	}
+%>
 
 <!DOCTYPE html>
 <html>
@@ -17,12 +27,13 @@
 			</div>
 			<div style="float: none;width: auto;overflow: hidden;min-height: 80px;position: relative;">
 				
+				<% if (mostrarOpcionesAdmin){ %>
 				<div style="position: absolute; left: 39%; top : 39%;">
-					
-						<form action="/tienda_informatica/fabricantes/crear">
-							<input type="submit" value="Crear">
-						</form>
-					</div>
+					<form action="/tienda_informatica/fabricantes/crear">
+						<input type="submit" value="Crear">
+					</form>
+				</div>
+				<% } %>
 				
 			</div>
 		</div>
@@ -71,6 +82,7 @@
 				<form action="/tienda_informatica/fabricantes/<%= fabricante.getCodigo()%>" style="display: inline;">
     				<input type="submit" value="Ver Detalle" />
 				</form>
+				<% if (mostrarOpcionesAdmin){ %>
 				<form action="/tienda_informatica/fabricantes/editar/<%= fabricante.getCodigo()%>" style="display: inline;">
     				<input type="submit" value="Editar" />
 				</form>
@@ -79,6 +91,7 @@
 					<input type="hidden" name="codigo" value="<%= fabricante.getCodigo()%>"/>
     				<input type="submit" value="Eliminar" />
 				</form>
+				<% } %>
 			</div>
 		</div>
 
