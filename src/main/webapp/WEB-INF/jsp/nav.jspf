@@ -1,22 +1,20 @@
-<%@page import="org.iesvegademijas.model.Usuario"%>
-<%@page import="javax.servlet.http.*"%>
 <nav class="menu">
-<section class="contenedor">
-	
-	<a href="/tienda_informatica/">HOME</a>
-	<a href="/tienda_informatica/fabricantes">Fabricantes</a>
-	<a href="/tienda_informatica/productos">Producto</a>
-	<a href="/tienda_informatica/usuarios">Usuario</a>
-	<div class="menu-log">
-		<% if (request.getSession().getAttribute("usuario-logeado") != null) { %>
-		<form action="/tienda_informatica/usuarios/logout/" method="post">
-			<input type="hidden" name="__method__" value="logout"/>
-			<input type="submit" value="LOGOUT" >
-		</form>
-		<% } else { %>
-			<a href="/tienda_informatica/usuarios/login">LOGIN</a>
-		<% }; %>
-	</div>
-</section>
+	<section class="contenedor">
+		
+		<a href="/tienda_informatica/">HOME</a>
+		<a href="/tienda_informatica/fabricantes">Fabricantes</a>
+		<a href="/tienda_informatica/productos">Producto</a>
+		<a href="/tienda_informatica/usuarios">Usuario</a>
+		<div class="menu-log">
+			<% if (request.getSession().getAttribute("usuario-logeado") != null) { %>
+			<form action="/tienda_informatica/usuarios/logout/" method="post">
+				<input type="hidden" name="__method__" value="logout"/>
+				<input type="submit" value="LOGOUT" >
+			</form>
+			<% } else { %>
+				<a href="/tienda_informatica/usuarios/login">LOGIN</a>
+			<% }; %>
+		</div>
+	</section>
 	
 </nav>

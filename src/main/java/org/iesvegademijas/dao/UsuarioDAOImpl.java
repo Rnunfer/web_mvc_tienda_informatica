@@ -232,23 +232,18 @@ public class UsuarioDAOImpl extends AbstractDAOImpl implements UsuarioDAO{
 
         	// Se utiliza un objeto Statement dado que no hay parámetros en la consulta.
 
-        	ps = conn.prepareStatement("SELECT * FROM usuario WHERE MATCH(nombre) AGAINST (?);");
+        	ps = conn.prepareStatement("SELECT * FROM usuario WHERE MATCH(nombre) AGAINST (?) and MATCH(contrasenia) AGAINST (?);");
             
         	ps.setString(1, nombre);
+        	ps.setString(2, contraseña);
         	rs = ps.executeQuery();
         	
             if (rs.next()) {
             	
-            	ps = conn.prepareStatement("SELECT * FROM usuario WHERE MATCH(contrasenia) AGAINST (?);");
-            	ps.setString(1, contraseña);
-            	rs = ps.executeQuery();
-            	
-            	if (rs.next()) {
-            		usuarioLogin.setCodigo(rs.getInt("codigo"));
-            		usuarioLogin.setNombre(rs.getString("nombre"));
-            		usuarioLogin.setContraseña(rs.getString("contrasenia"));
-            		usuarioLogin.setRol(rs.getString("rol"));
-            	}
+        		usuarioLogin.setCodigo(rs.getInt("codigo"));
+        		usuarioLogin.setNombre(rs.getString("nombre"));
+        		usuarioLogin.setContraseña(rs.getString("contrasenia"));
+        		usuarioLogin.setRol(rs.getString("rol"));
             	
             }
           
