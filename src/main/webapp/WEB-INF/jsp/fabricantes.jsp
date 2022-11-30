@@ -3,15 +3,6 @@
 <%@page import="org.iesvegademijas.dto.FabricanteDTO"%>
 <%@page import="org.iesvegademijas.model.Usuario"%>
 <%@page import="java.util.List"%>
-<%
-	Usuario usuario = null;
-	usuario = (Usuario)session.getAttribute("usuario-logeado");
-	
-	boolean mostrarOpcionesAdmin = false;
-	if (session != null && (usuario = (Usuario)session.getAttribute("usuario-logeado") )!= null && "Administrador".equals(usuario.getRol())) {
-		mostrarOpcionesAdmin = true;
-	}
-%>
 
 <!DOCTYPE html>
 <html>
