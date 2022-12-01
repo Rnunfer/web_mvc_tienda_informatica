@@ -107,11 +107,13 @@ public class ProductosServlet extends HttpServlet {
 				
 			} else if (pathParts.length == 3 && "editar".equals(pathParts[1]) ) {
 				ProductoDAO prodDAO = new ProductoDAOImpl();
+				FabricanteDAO fabDAO = new FabricanteDAOImpl();
 				
 				// GET
 				// /productos/edit/{id}
 				try {
 					request.setAttribute("producto",prodDAO.find(Integer.parseInt(pathParts[2])));
+					request.setAttribute("listaFabricantes", fabDAO.getAll());
 					dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/editar-producto.jsp");
 					        								
 				} catch (NumberFormatException nfe) {
